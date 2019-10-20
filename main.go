@@ -36,6 +36,7 @@ func moveCursor(row, col int) {
 }
 
 func printScreen() {
+	clearScreen()
 	for _, line := range maze {
 		fmt.Println(line)
 	}
@@ -79,22 +80,26 @@ func cleanup() {
 func main() {
 	// initialize game
 	defer cleanup()
+
 	// load resources
 	err := loadMaze()
 	if err != nil {
 		log.Printf("Error loading maze: %v\n", err)
 		return
 	}
+
 	// game loop
 	for {
 		// update screen
 		printScreen()
+
 		// process input
 		input, err := readInput()
 		if err != nil {
 			log.Printf("Error reading input: %v", err)
 			break
 		}
+
 		// process movement
 
 		// process collisions
@@ -103,6 +108,7 @@ func main() {
 		if input == "ESC" {
 			break
 		}
+
 		// repeat
 	}
 }
